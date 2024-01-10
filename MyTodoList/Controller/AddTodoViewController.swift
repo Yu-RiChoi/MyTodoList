@@ -28,7 +28,6 @@ class AddTodoViewController: UIViewController, UITableViewDataSource, UITableVie
         showAlert()
     }
     
-    
     // MARK: - TableView
     
     // section 개수
@@ -48,10 +47,12 @@ class AddTodoViewController: UIViewController, UITableViewDataSource, UITableVie
     
     // 특정 인덱스 row의 셀에 대한 정보를 넣어 셀을 반환
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell =  tableView.dequeueReusableCell(withIdentifier: "todoCell", for: indexPath)
-        let todo = self.todos[indexPath.row]
-        cell.textLabel?.text = todo.title
         cell.selectionStyle = .none
+        
+        let todo = self.todos[indexPath.row].title
+        cell.textLabel?.text = todo
 
         return cell
     }
@@ -70,7 +71,7 @@ class AddTodoViewController: UIViewController, UITableViewDataSource, UITableVie
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             todos.remove(at: indexPath.row)
-            todoTableView.deleteRows(at: [indexPath], with: .fade)
+            todoTableView.reloadData()
         }
         // 삭제 후 데이터 저장
         createTodo()
