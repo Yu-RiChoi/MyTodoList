@@ -51,7 +51,7 @@ class AddTodoViewController: UIViewController, UITableViewDataSource, UITableVie
         let cell =  tableView.dequeueReusableCell(withIdentifier: "todoCell", for: indexPath)
         cell.selectionStyle = .none
         
-        let todo = self.todos[indexPath.row].title
+        let todo = todos[indexPath.row].title
         cell.textLabel?.text = todo
 
         return cell
